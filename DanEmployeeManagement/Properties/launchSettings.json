@@ -11,7 +11,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "environmentVariables": {S
+      "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "MyKey": "Value of MyKey from Environment Sappsettings.json"
       }
