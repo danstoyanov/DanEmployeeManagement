@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace DanEmployeeManagement
 {
@@ -29,21 +30,32 @@ namespace DanEmployeeManagement
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,
+            ILogger<Startup> logger)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
-            app.Run(async (context) =>
+            app.Use(async (context, next) =>
             {
-                await context.Response.WriteAsync("Hello from the First(1) middleware !!");
+                logger.LogInformation("middle 1: Incoming request");
+                await next();
+                logger.LogInformation("middle 1: Outcoming response");
+            });
+
+            app.Use(async (context, next) =>
+            {
+                logger.LogInformation("middle 2: Incoming request");
+                await next();
+                logger.LogInformation("middle 2: Outcoming response");
             });
 
             app.Run(async (context) =>
             {
-                await context.Response.WriteAsync("Hello from the Second(2) middleware !!");
+                await context.Response.WriteAsync("middle 3: Hello from the Second(2) middleware !!");
+                logger.LogInformation("middle 3: response");
             });
         }
     }
