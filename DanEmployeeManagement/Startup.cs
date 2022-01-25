@@ -38,24 +38,15 @@ namespace DanEmployeeManagement
                 app.UseDeveloperExceptionPage();
             }
 
-            app.Use(async (context, next) =>
-            {
-                logger.LogInformation("middle 1: Incoming request");
-                await next();
-                logger.LogInformation("middle 1: Outcoming response");
-            });
+            // To show deff files !
+            app.UseDefaultFiles();
 
-            app.Use(async (context, next) =>
-            {
-                logger.LogInformation("middle 2: Incoming request");
-                await next();
-                logger.LogInformation("middle 2: Outcoming response");
-            });
+            // To vizualize images !
+            app.UseStaticFiles();
 
             app.Run(async (context) =>
             {
                 await context.Response.WriteAsync("middle 3: Hello from the Second(2) middleware !!");
-                logger.LogInformation("middle 3: response");
             });
         }
     }
