@@ -43,7 +43,7 @@ namespace DanEmployeeManagement
                 endpoints.MapGet("/", async context =>
                 {
                     await context.Response
-                    .WriteAsync(System.Diagnostics.Process.GetCurrentProcess().ProcessName);
+                    .WriteAsync(this.config["MyKey"]);
                 });
             });
         }
