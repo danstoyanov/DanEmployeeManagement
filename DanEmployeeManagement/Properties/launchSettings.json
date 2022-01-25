@@ -11,8 +11,9 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+      "environmentVariables": {S
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "MyKey": "Value of MyKey from Environment Sappsettings.json"
       }
     },
     "DanEmployeeManagement": {
