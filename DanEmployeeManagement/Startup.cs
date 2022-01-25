@@ -36,15 +36,14 @@ namespace DanEmployeeManagement
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseRouting();
-
-            app.UseEndpoints(endpoints =>
+            app.Run(async (context) =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response
-                    .WriteAsync(this.config["MyKey"]);
-                });
+                await context.Response.WriteAsync("Hello from the First(1) middleware !!");
+            });
+
+            app.Run(async (context) =>
+            {
+                await context.Response.WriteAsync("Hello from the Second(2) middleware !!");
             });
         }
     }
