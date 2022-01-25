@@ -30,24 +30,36 @@ namespace DanEmployeeManagement
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,
-            ILogger<Startup> logger)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
-            // To show deff files !
-            app.UseDefaultFiles();
-
-            // To vizualize images !
-            app.UseStaticFiles();
+            app.UseFileServer();
 
             app.Run(async (context) =>
             {
-                await context.Response.WriteAsync("middle 3: Hello from the Second(2) middleware !!");
+                throw new Exception("We have some error here !!!");
+                await context.Response.WriteAsync("Hello from Dan !!!");
             });
         }
     }
 }
+
+            // To add foo file like deff 
+            //FileServerOptions fileServerOptions = new FileServerOptions();
+            //fileServerOptions.DefaultFilesOptions.DefaultFileNames.Clear();
+            //fileServerOptions.DefaultFilesOptions.DefaultFileNames.Add("foo.html");
+            //app.UseFileServer(fileServerOptions);
+
+
+            // How to show deff files in web browser and how to change other file to deff !
+            //DefaultFilesOptions deffFilesOption = new DefaultFilesOptions();
+            //deffFilesOption.DefaultFileNames.Clear();
+            //deffFilesOption.DefaultFileNames.Add("foo.html");
+            //app.UseDefaultFiles(deffFilesOption);
+
+            //// To vizualize images !
+            //app.UseStaticFiles();
