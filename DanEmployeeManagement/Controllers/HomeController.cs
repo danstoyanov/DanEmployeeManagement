@@ -1,7 +1,9 @@
-﻿namespace DanEmployeeManagement.Controllers
+﻿using Microsoft.AspNetCore.Mvc;
+
+namespace DanEmployeeManagement.Controllers
 {
-    public class HomeController
+    public class HomeController : Controller
     {
-        public string Index() => "Hello from MVC !!!";
+        public JsonResult Index() => Json(new { id = 1, name = "Pelicanko" });
     }
 }
