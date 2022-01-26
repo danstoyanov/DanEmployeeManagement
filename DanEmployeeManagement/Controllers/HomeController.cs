@@ -8,9 +8,9 @@ namespace DanEmployeeManagement.Controllers
     {
         private IEmployeeRepository employeeRepository;
 
-        public HomeController(IEmployeeRepository employeeRepository)
+        public HomeController()
         {
-            this.employeeRepository = employeeRepository;
+            this.employeeRepository = new MockEmployeeRepository();
         }
 
         public string Index() => employeeRepository.GetEmployee(1).Name;
