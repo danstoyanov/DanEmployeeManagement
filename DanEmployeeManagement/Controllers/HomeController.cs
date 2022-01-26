@@ -6,14 +6,21 @@ namespace DanEmployeeManagement.Controllers
 {
     public class HomeController : Controller
     {
-        private IEmployeeRepository employeeRepository;
+        private readonly IEmployeeRepository employeeRepository;
 
-        public HomeController()
+        public HomeController(IEmployeeRepository employeeRepository)
         {
             this.employeeRepository = new MockEmployeeRepository();
         }
 
         public string Index() => employeeRepository.GetEmployee(1).Name;
+
+        public ObjectResult Details()
+        {
+            Employee model = this.employeeRepository.GetEmployee(1);
+
+            return new ObjectResult(model);
+        }
 
     }
 }

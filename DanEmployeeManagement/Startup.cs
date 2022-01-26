@@ -26,8 +26,12 @@ namespace DanEmployeeManagement
 
         public void ConfigureServices(IServiceCollection services)
         {
-          //  services.AddMvc(options => options.EnableEndpointRouting = false);
-            services.AddMvcCore(options => options.EnableEndpointRouting = false);
+            // services.AddMvcCore(options => options.EnableEndpointRouting = false).AddXmlSerializerFormatters();
+
+            services.AddMvc(mvcoptions => mvcoptions.EnableEndpointRouting = false)
+                .AddXmlSerializerFormatters()
+                .AddXmlDataContractSerializerFormatters();
+
             services.AddSingleton<IEmployeeRepository, MockEmployeeRepository>();
         }
 
