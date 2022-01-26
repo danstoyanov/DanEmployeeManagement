@@ -37,17 +37,15 @@ namespace DanEmployeeManagement
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseFileServer();
+            app.UseStaticFiles();
 
             app.Run(async (context) =>
             {
-                throw new Exception("We have some error here !!!");
-                await context.Response.WriteAsync("Hello from Dan !!!");
+                await context.Response.WriteAsync("Hello from hosting env: " + env.EnvironmentName);
             });
         }
     }
 }
-
             // To add foo file like deff 
             //FileServerOptions fileServerOptions = new FileServerOptions();
             //fileServerOptions.DefaultFilesOptions.DefaultFileNames.Clear();
