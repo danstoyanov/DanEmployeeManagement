@@ -19,8 +19,8 @@ namespace DanEmployeeManagement.Controllers
         {
             Employee employee = employeeRepository.GetEmployee(1);
 
-            ViewData["Employee"] = employee;
-            ViewData["PageTitle"] = "Employee Details";
+            ViewBag.Employee = employee;
+            ViewBag.PageTitle = "Employee Details";
 
             return View();
         }
