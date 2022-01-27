@@ -15,13 +15,17 @@ namespace DanEmployeeManagement.Controllers
 
         public string Index() => employeeRepository.GetEmployee(1).Name;
 
-        public ObjectResult Details()
+        public ViewResult Details()
         {
-            Employee model = this.employeeRepository.GetEmployee(1);
+            Employee employee = employeeRepository.GetEmployee(1);
 
-            return new ObjectResult(model);
+            return View(employee);
         }
 
+        public ViewResult DanTestView()
+        {
+            return View();
+        }
     }
 }
 
