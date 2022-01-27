@@ -19,12 +19,7 @@ namespace DanEmployeeManagement.Controllers
         {
             Employee employee = employeeRepository.GetEmployee(1);
 
-            return View(employee);
-        }
-
-        public ViewResult DanTestView()
-        {
-            return View();
+            return View("../MyViews/Details");
         }
     }
 }
