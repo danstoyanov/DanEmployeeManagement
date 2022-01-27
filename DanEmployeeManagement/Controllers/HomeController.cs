@@ -19,7 +19,10 @@ namespace DanEmployeeManagement.Controllers
         {
             Employee employee = employeeRepository.GetEmployee(1);
 
-            return View("../MyViews/Details");
+            ViewData["Employee"] = employee;
+            ViewData["PageTitle"] = "Employee Details";
+
+            return View();
         }
     }
 }
