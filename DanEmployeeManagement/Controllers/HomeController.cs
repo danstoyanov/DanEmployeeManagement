@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
 using DanEmployeeManagement.Models;
+using DanEmployeeManagement.ViewModels;
 
 namespace DanEmployeeManagement.Controllers
 {
@@ -17,11 +18,13 @@ namespace DanEmployeeManagement.Controllers
 
         public ViewResult Details()
         {
-            Employee employee = employeeRepository.GetEmployee(1);
+            HomeDetailsViewModel homeDetailsViewModel = new()
+            {
+                Employee = this.employeeRepository.GetEmployee(1),
+                PageTitle = "Employee Details"
+            };
 
-            ViewBag.PageTitle = "Employee Details";
-
-            return View(employee);
+            return View(homeDetailsViewModel);
         }
     }
 }

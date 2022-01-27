@@ -1,20 +1,20 @@
-﻿@model DanEmployeeManagement.Models.Employee
+﻿@model DanEmployeeManagement.ViewModels.HomeDetailsViewModel
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
 </head>
 <body>
-    <h3>@ViewBag.PageTitle</h3>
+    <h3>@Model.PageTitle</h3>
 
     <div>
-        Name: @Model.Name
+        <b>Name:</b> @Model.Employee.Name
     </div>
     <div>
-        Email: @Model.Email
+        <b>Email:</b> @Model.Employee.Email
     </div>
     <div>
-        Department: @Model.Department
+        <b>Department:</b> @Model.Employee.Department
     </div>
 </body>
 </html>
