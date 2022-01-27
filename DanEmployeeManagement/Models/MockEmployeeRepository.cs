@@ -18,6 +18,11 @@ namespace DanEmployeeManagement.Models
             };
         }
 
+        public IEnumerable<Employee> GetAllEmployee()
+        {
+            return this.employees;
+        }
+
         public Employee GetEmployee(int Id)
         {
             return employees.FirstOrDefault(e => e.Id == Id);

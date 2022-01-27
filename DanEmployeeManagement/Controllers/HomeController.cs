@@ -14,7 +14,12 @@ namespace DanEmployeeManagement.Controllers
             this.employeeRepository = new MockEmployeeRepository();
         }
 
-        public string Index() => employeeRepository.GetEmployee(1).Name;
+        public ViewResult Index()
+        {
+            var employees = employeeRepository.GetAllEmployee();
+
+            return View(employees);
+        }
 
         public ViewResult Details()
         {
