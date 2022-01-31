@@ -40,12 +40,11 @@ namespace DanEmployeeManagement
 
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
-
-            app.Run(async (context) =>
+            app.UseMvc(routes =>
             {
-                await context.Response.WriteAsync("Hi there I am Server Dan!");
-            });
 
+                routes.MapRoute("default", "{controller=Home}/{action=Details}/{id=2}");
+            });
         }
     }
 }

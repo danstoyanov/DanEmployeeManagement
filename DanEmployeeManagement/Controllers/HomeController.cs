@@ -21,11 +21,11 @@ namespace DanEmployeeManagement.Controllers
             return View(employees);
         }
 
-        public ViewResult Details()
+        public ViewResult Details(int id)
         {
             HomeDetailsViewModel homeDetailsViewModel = new()
             {
-                Employee = this.employeeRepository.GetEmployee(1),
+                Employee = this.employeeRepository.GetEmployee(id),
                 PageTitle = "Employee Details"
             };
 
