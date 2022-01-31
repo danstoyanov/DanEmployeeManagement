@@ -6,26 +6,22 @@ using DanEmployeeManagement.ViewModels;
 namespace DanEmployeeManagement.Controllers
 {
     [Route("Home")]
-    public class WellcomeController : Controller
+    public class HomeController : Controller
     {
         private readonly IEmployeeRepository employeeRepository;
 
-        public WellcomeController(IEmployeeRepository employeeRepository)
+        public HomeController(IEmployeeRepository employeeRepository)
         {
             this.employeeRepository = new MockEmployeeRepository();
         }
 
-        [Route("")]
-        [Route("Index")]
-        [Route("~/")]
         public ViewResult Index()
         {
             var employees = employeeRepository.GetAllEmployee();
 
-            return View("~/Views/Home/index.cshtml", employees);
+            return View(employees);
         }
 
-        [Route("Details/{id=1}")]
         public ViewResult Details(int id)
         {
             HomeDetailsViewModel homeDetailsViewModel = new()

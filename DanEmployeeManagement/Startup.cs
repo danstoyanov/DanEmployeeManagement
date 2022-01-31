@@ -33,14 +33,12 @@ namespace DanEmployeeManagement
             }
 
             app.UseStaticFiles();
-            // app.UseMvcWithDefaultRoute();
-            //app.UseMvc(routes =>
-            //{
+            //app.UseMvcWithDefaultRoute();
+            app.UseMvc(routes =>
+            {
 
-            //    routes.MapRoute("default", "{controller=Home}/{action=Details}/{id=2}");
-            //});
-
-            app.UseMvc();
+                routes.MapRoute("default", "{controller=Home}/{action=Details}/{id=2}");
+            });
         }
     }
 }
