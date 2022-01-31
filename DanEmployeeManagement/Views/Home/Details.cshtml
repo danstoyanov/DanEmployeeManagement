@@ -1,20 +1,18 @@
 ﻿@model DanEmployeeManagement.ViewModels.HomeDetailsViewModel
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <title></title>
-</head>
-<body>
-    <h3>@Model.PageTitle</h3>
+@{
+    Layout = "~/Views/Shared/Layout.cshtml";
+    ViewBag.Title = "Employee Details";
+}
 
-    <div>
-        <b>Name:</b> @Model.Employee.Name
-    </div>
-    <div>
-        <b>Email:</b> @Model.Employee.Email
-    </div>
-    <div>
-        <b>Department:</b> @Model.Employee.Department
-    </div>
-</body>
-</html>
+<h3>@Model.PageTitle</h3>
+
+<div>
+    <b>Name:</b> @Model.Employee.Name
+</div>
+<div>
+    <b>Email:</b> @Model.Employee.Email
+</div>
+<div>
+    <b>Department:</b> @Model.Employee.Department
+</div>
