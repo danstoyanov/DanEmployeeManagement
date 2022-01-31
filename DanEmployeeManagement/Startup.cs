@@ -1,15 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using DanEmployeeManagement.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace DanEmployeeManagement
 {
@@ -39,12 +33,14 @@ namespace DanEmployeeManagement
             }
 
             app.UseStaticFiles();
-            app.UseMvcWithDefaultRoute();
-            app.UseMvc(routes =>
-            {
+            // app.UseMvcWithDefaultRoute();
+            //app.UseMvc(routes =>
+            //{
 
-                routes.MapRoute("default", "{controller=Home}/{action=Details}/{id=2}");
-            });
+            //    routes.MapRoute("default", "{controller=Home}/{action=Details}/{id=2}");
+            //});
+
+            app.UseMvc();
         }
     }
 }
