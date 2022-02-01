@@ -12,9 +12,9 @@ namespace DanEmployeeManagement.Models
         {
             this.employees = new List<Employee>()
             {
-                new Employee() {Id = 1, Name = "Mincho", Email = "mincho@abv.bg", Department = "Build  👷‍♂️"},
-                new Employee() {Id = 2, Name = "Galin", Email = "galin@abv.bg", Department = "Drive  🚗"},
-                new Employee() {Id = 3, Name = "Danko", Email = "danko@abv.bg", Department = "Design  🎨"}
+                new Employee() {Id = 1, Name = "Mincho", Email = "mincho@abv.bg", Department = Depts.Build},
+                new Employee() {Id = 2, Name = "Galin", Email = "galin@abv.bg", Department = Depts.Design},
+                new Employee() {Id = 3, Name = "Danko", Email = "danko@abv.bg", Department = Depts.Drive}
             };
         }
 

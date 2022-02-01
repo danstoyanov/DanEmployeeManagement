@@ -13,6 +13,6 @@ namespace DanEmployeeManagement.Models
 
         public string Email { get; set; }
 
-        public string Department { get; set; }
+        public Depts Department { get; set; }
     }
 }

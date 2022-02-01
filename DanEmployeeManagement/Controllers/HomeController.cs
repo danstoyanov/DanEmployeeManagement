@@ -31,6 +31,11 @@ namespace DanEmployeeManagement.Controllers
 
             return View(homeDetailsViewModel);
         }
+
+        public ViewResult Create()
+        {
+            return View();
+        }
     }
 }
 
