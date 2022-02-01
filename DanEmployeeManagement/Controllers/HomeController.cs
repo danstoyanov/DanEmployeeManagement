@@ -5,7 +5,6 @@ using DanEmployeeManagement.ViewModels;
 
 namespace DanEmployeeManagement.Controllers
 {
-    [Route("Home")]
     public class HomeController : Controller
     {
         private readonly IEmployeeRepository employeeRepository;

@@ -5,8 +5,4 @@
 		<AspNetCoreHostingModel>OutOfProcces</AspNetCoreHostingModel>
 	</PropertyGroup>
 
-	<ItemGroup>
-	  <Folder Include="wwwroot\css\" />
-	</ItemGroup>
-
 </Project>
