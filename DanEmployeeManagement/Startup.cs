@@ -36,8 +36,7 @@ namespace DanEmployeeManagement
             //app.UseMvcWithDefaultRoute();
             app.UseMvc(routes =>
             {
-
-                routes.MapRoute("default", "danemployeecorp/{controller=Home}/{action=Index}/{id=1}");
+                routes.MapRoute("default", "{controller=Home}/{action=Index}/{id=1}");
             });
         }
     }
