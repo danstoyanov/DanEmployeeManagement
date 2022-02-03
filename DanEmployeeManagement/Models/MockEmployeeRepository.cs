@@ -18,6 +18,15 @@ namespace DanEmployeeManagement.Models
             };
         }
 
+        public Employee Add(Employee employee)
+        {
+            employee.Id = this.employees.Max(e => e.Id) + 1;
+
+            this.employees.Add(employee);
+
+            return employee;
+        }
+
         public IEnumerable<Employee> GetAllEmployee()
         {
             return this.employees;

@@ -11,7 +11,7 @@ namespace DanEmployeeManagement.Controllers
 
         public HomeController(IEmployeeRepository employeeRepository)
         {
-            this.employeeRepository = new MockEmployeeRepository();
+            this.employeeRepository = employeeRepository;
         }
 
         public ViewResult Index()
@@ -32,9 +32,18 @@ namespace DanEmployeeManagement.Controllers
             return View(homeDetailsViewModel);
         }
 
+        [HttpGet]
         public ViewResult Create()
         {
             return View();
+        }
+
+        [HttpPost]
+        public RedirectToActionResult Create(Employee employee)
+        {
+            var currEmployee = this.employeeRepository.Add(employee);
+
+            return RedirectToAction("details", new { id = employee.Id });
         }
     }
 }
