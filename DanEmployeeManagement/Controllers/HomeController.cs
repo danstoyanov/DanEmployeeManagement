@@ -39,11 +39,15 @@ namespace DanEmployeeManagement.Controllers
         }
 
         [HttpPost]
-        public RedirectToActionResult Create(Employee employee)
+        public IActionResult Create(Employee employee)
         {
-            var currEmployee = this.employeeRepository.Add(employee);
+            if (ModelState.IsValid)
+            {
+                var currEmployee = this.employeeRepository.Add(employee);
+                return RedirectToAction("details", new { id = employee.Id });
+            }
 
-            return RedirectToAction("details", new { id = employee.Id });
+            return View();
         }
     }
 }
