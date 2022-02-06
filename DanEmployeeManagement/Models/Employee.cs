@@ -20,6 +20,7 @@ namespace DanEmployeeManagement.Models
         [Display(Name = "Office Email")]
         public string Email { get; set; }
 
+        [Required]
         public Depts Department { get; set; }
     }
 }
