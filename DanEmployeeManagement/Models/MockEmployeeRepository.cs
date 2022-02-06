@@ -27,14 +27,40 @@ namespace DanEmployeeManagement.Models
             return employee;
         }
 
+        public Employee Delete(int id)
+        {
+            var employee = this.employees.FirstOrDefault(e => e.Id == id);
+
+            if (employee != null)
+            {
+                this.employees.Remove(employee);
+            }
+
+            return employee;
+        }
+
         public IEnumerable<Employee> GetAllEmployee()
         {
             return this.employees;
         }
 
-        public Employee GetEmployee(int Id)
+        public Employee GetEmployee(int id)
         {
-            return employees.FirstOrDefault(e => e.Id == Id);
+            return employees.FirstOrDefault(e => e.Id == id);
+        }
+
+        public Employee Update(Employee employeeUpdate)
+        {
+            var employee = this.employees.FirstOrDefault(e => e.Id == employeeUpdate.Id);
+
+            if (employee != null)
+            {
+                employee.Name = employeeUpdate.Name;
+                employee.Email = employeeUpdate.Email;
+                employee.Department = employeeUpdate.Department;
+            }
+
+            return employee;
         }
     }
 }

@@ -1,10 +1,11 @@
-using DanEmployeeManagement.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore; 
+
+using DanEmployeeManagement.Models;
 
 namespace DanEmployeeManagement
 {
@@ -26,7 +27,7 @@ namespace DanEmployeeManagement
                     .AddXmlSerializerFormatters()
                     .AddXmlDataContractSerializerFormatters();
 
-            services.AddTransient<IEmployeeRepository, MockEmployeeRepository>();
+            services.AddScoped<IEmployeeRepository, SqlEmployeeRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
