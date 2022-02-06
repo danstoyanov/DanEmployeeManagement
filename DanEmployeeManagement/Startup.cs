@@ -19,10 +19,10 @@ namespace DanEmployeeManagement
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc(mvcoptions => mvcoptions.EnableEndpointRouting = false)
-                .AddXmlSerializerFormatters()
-                .AddXmlDataContractSerializerFormatters();
+                    .AddXmlSerializerFormatters()
+                    .AddXmlDataContractSerializerFormatters();
 
-            services.AddSingleton<IEmployeeRepository, MockEmployeeRepository>();
+            services.AddTransient<IEmployeeRepository, MockEmployeeRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

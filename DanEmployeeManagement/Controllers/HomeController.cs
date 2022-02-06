@@ -44,7 +44,7 @@ namespace DanEmployeeManagement.Controllers
             if (ModelState.IsValid)
             {
                 var currEmployee = this.employeeRepository.Add(employee);
-                return RedirectToAction("details", new { id = employee.Id });
+                //  return RedirectToAction("details", new { id = employee.Id });
             }
 
             return View();
