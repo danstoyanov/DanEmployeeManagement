@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DanEmployeeManagement.Db.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220206211635_EmployeeDbTables")]
+    [Migration("20220206213236_EmployeeDbTables")]
     partial class EmployeeDbTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
