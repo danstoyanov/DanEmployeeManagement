@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 
 using DanEmployeeManagement.Models;
+using System.Collections.Generic;
 
 namespace DanEmployeeManagement.ViewModels
 {
@@ -20,6 +21,6 @@ namespace DanEmployeeManagement.ViewModels
         [Required]
         public Depts Department { get; set; }
 
-        public IFormFile Photo { get; set; }
+        public List<IFormFile> Photos { get; set; }
     }
 }

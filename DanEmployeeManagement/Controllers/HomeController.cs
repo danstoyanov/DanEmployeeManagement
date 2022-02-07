@@ -5,6 +5,7 @@ using DanEmployeeManagement.Models;
 using DanEmployeeManagement.ViewModels;
 using System.IO;
 using System;
+using Microsoft.AspNetCore.Http;
 
 namespace DanEmployeeManagement.Controllers
 {
@@ -52,16 +53,20 @@ namespace DanEmployeeManagement.Controllers
             {
                 string uniqueFileName = null;
 
-                if (model.Photo != null)
+                if (model.Photos != null && model.Photos.Count > 0)
                 {
-                    string uploadsFolder = Path.Combine(this.hostingEnvironment.WebRootPath, "images");
+                    foreach (IFormFile photo in model.Photos)
+                    {
+                        string uploadsFolder = Path.Combine(this.hostingEnvironment.WebRootPath, "images");
 
-                    uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Photo.FileName;
+                        uniqueFileName = Guid.NewGuid().ToString() + "_" + photo.FileName;
 
-                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                        string filePath = Path.Combine(uploadsFolder, uniqueFileName);
 
-                    model.Photo.CopyTo(new FileStream(filePath, FileMode.Create));
+                        photo.CopyTo(new FileStream(filePath, FileMode.Create));
+                    }
                 }
+
 
                 var newEmployee = new Employee
                 {
