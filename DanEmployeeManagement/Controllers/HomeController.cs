@@ -1,17 +1,24 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Hosting;
 
 using DanEmployeeManagement.Models;
 using DanEmployeeManagement.ViewModels;
+using System.IO;
+using System;
 
 namespace DanEmployeeManagement.Controllers
 {
     public class HomeController : Controller
     {
         private readonly IEmployeeRepository employeeRepository;
+        private readonly IHostingEnvironment hostingEnvironment;
 
-        public HomeController(IEmployeeRepository employeeRepository)
+        public HomeController(
+            IEmployeeRepository employeeRepository,
+            IHostingEnvironment hostingEnvironment)
         {
             this.employeeRepository = employeeRepository;
+            this.hostingEnvironment = hostingEnvironment;
         }
 
         public ViewResult Index()
@@ -39,12 +46,34 @@ namespace DanEmployeeManagement.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Employee employee)
+        public IActionResult Create(EmployeeCreateViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var currEmployee = this.employeeRepository.Add(employee);
-                //  return RedirectToAction("details", new { id = employee.Id });
+                string uniqueFileName = null;
+
+                if (model.Photo != null)
+                {
+                    string uploadsFolder = Path.Combine(this.hostingEnvironment.WebRootPath, "images");
+
+                    uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Photo.FileName;
+
+                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                    model.Photo.CopyTo(new FileStream(filePath, FileMode.Create));
+                }
+
+                var newEmployee = new Employee
+                {
+                    Name = model.Name,
+                    Email = model.Email,
+                    Department = model.Department,
+                    PhotoPath = uniqueFileName
+                };
+
+                this.employeeRepository.Add(newEmployee);
+
+                return RedirectToAction("details", new { id = newEmployee.Id });
             }
 
             return View();
