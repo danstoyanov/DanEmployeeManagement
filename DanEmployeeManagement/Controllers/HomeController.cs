@@ -41,6 +41,23 @@ namespace DanEmployeeManagement.Controllers
         }
 
         [HttpGet]
+        public ViewResult Edit(int id)
+        {
+            var employee = this.employeeRepository.GetEmployee(id);
+
+            var employeeEditViewModel = new EmployeeEditViewModel
+            {
+                Id = employee.Id,
+                Name = employee.Name,
+                Email = employee.Email,
+                Department = employee.Department,
+                ExistingPhotoPath = employee.PhotoPath
+            };
+
+            return View(employeeEditViewModel);
+        }
+
+        [HttpGet]
         public ViewResult Create()
         {
             return View();
