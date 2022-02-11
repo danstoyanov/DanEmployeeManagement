@@ -29,11 +29,19 @@ namespace DanEmployeeManagement.Controllers
             return View(employees);
         }
 
-        public ViewResult Details(int id)
+        public ViewResult Details(int? id)
         {
-            HomeDetailsViewModel homeDetailsViewModel = new()
+            var employee = this.employeeRepository.GetEmployee(id.Value);
+
+            if (employee == null)
             {
-                Employee = this.employeeRepository.GetEmployee(id),
+                Response.StatusCode = 404;
+                return View("EmployeeNotFound", id.Value);
+            }
+
+            var homeDetailsViewModel = new HomeDetailsViewModel
+            {
+                Employee = employee,
                 PageTitle = "Employee Details"
             };
 
