@@ -27,6 +27,12 @@ namespace DanEmployeeManagement
             services.AddIdentity<IdentityUser, IdentityRole>()
                     .AddEntityFrameworkStores<AppDbContext>();
 
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequiredLength = 10;
+                options.
+            });
+
             services.AddMvc(mvcoptions => mvcoptions.EnableEndpointRouting = false)
                     .AddXmlSerializerFormatters()
                     .AddXmlDataContractSerializerFormatters();
