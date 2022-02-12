@@ -30,7 +30,8 @@ namespace DanEmployeeManagement
             services.Configure<IdentityOptions>(options =>
             {
                 options.Password.RequiredLength = 10;
-                options.
+                options.Password.RequiredUniqueChars = 3;
+                options.Password.RequireNonAlphanumeric = false;
             });
 
             services.AddMvc(mvcoptions => mvcoptions.EnableEndpointRouting = false)
