@@ -31,6 +31,8 @@ namespace DanEmployeeManagement.Controllers
 
         public ViewResult Details(int? id)
         {
+            throw new Exception("Error in Detaisls View");
+
             var employee = this.employeeRepository.GetEmployee(id.Value);
 
             if (employee == null)

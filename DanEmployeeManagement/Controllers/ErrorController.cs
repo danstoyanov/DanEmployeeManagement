@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Authorization;
 
@@ -6,13 +7,24 @@ namespace DanEmployeeManagement.Controllers
 {
     public class ErrorController : Controller
     {
+        private readonly ILogger<ErrorContext> logger;
+
+        public ErrorController(ILogger<ErrorContext> logger)
+        {
+            this.logger = logger;
+        }
+
         [Route("Error/{statusCode}")]
         public IActionResult HttpStatusCodeHandler(int statusCode)
         {
+            var statusCodeResult = HttpContext.Features.Get<IStatusCodeReExecuteFeature>();
+
             switch (statusCode)
             {
                 case 404:
                     ViewBag.ErrorMessage = "Sorry, the resourse you requested could not be found";
+                    logger.LogWarning($"404 Error Occured. Path = {statusCodeResult.OriginalPath} " +
+                        $"and QueryString = {statusCodeResult.OriginalQueryString}");
                     break;
             }
 
@@ -25,9 +37,8 @@ namespace DanEmployeeManagement.Controllers
         {
             var exeptionDetails = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
 
-            ViewBag.ExceptionPath = exeptionDetails.Path;
-            ViewBag.ExeptionMessage = exeptionDetails.Error.Message;
-            ViewBag.Stacktrace = exeptionDetails.Error.StackTrace;
+            logger.LogError($"The path {exeptionDetails.Path} threw an exception " +
+                $"{exeptionDetails.Error}");
 
             return View("Error");
         }
