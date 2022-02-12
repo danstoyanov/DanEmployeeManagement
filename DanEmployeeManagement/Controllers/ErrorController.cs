@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +21,20 @@ namespace DanEmployeeManagement.Controllers
             }
 
             return View("NotFound");
+        }
+
+
+        [Route("Error")]
+        [AllowAnonymous]
+        public IActionResult Error()
+        {
+            var exeptionDetails = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
+
+            ViewBag.ExceptionPath = exeptionDetails.Path;
+            ViewBag.ExeptionMessage = exeptionDetails.Error.Message;
+            ViewBag.Stacktrace = exeptionDetails.Error.StackTrace;
+
+            return View("Error");
         }
     }
 }
