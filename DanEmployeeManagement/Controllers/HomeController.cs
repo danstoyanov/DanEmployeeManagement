@@ -6,6 +6,7 @@ using DanEmployeeManagement.ViewModels;
 using System.IO;
 using System;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 
 namespace DanEmployeeManagement.Controllers
 {
@@ -13,13 +14,16 @@ namespace DanEmployeeManagement.Controllers
     {
         private readonly IEmployeeRepository employeeRepository;
         private readonly IHostingEnvironment hostingEnvironment;
+        private readonly ILogger logger;
 
         public HomeController(
             IEmployeeRepository employeeRepository,
-            IHostingEnvironment hostingEnvironment)
+            IHostingEnvironment hostingEnvironment,
+            ILogger<HomeController> logger)
         {
             this.employeeRepository = employeeRepository;
             this.hostingEnvironment = hostingEnvironment;
+            this.logger = logger;
         }
 
         public ViewResult Index()
@@ -31,7 +35,14 @@ namespace DanEmployeeManagement.Controllers
 
         public ViewResult Details(int? id)
         {
-            throw new Exception("Error in Detaisls View");
+            //   throw new Exception("Error in Detaisls View");
+
+            logger.LogTrace("Trace Log");
+            logger.LogDebug("Debug Log");
+            logger.LogInformation("Information Log");
+            logger.LogWarning("Warning Log");
+            logger.LogError("Error Log");
+            logger.LogCritical("Crititcal Log");
 
             var employee = this.employeeRepository.GetEmployee(id.Value);
 
