@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 using DanEmployeeManagement.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace DanEmployeeManagement
 {
@@ -22,6 +23,9 @@ namespace DanEmployeeManagement
         {
             services.AddDbContextPool<AppDbContext>(
                 options => options.UseSqlServer(config.GetConnectionString("DanEmployeeDBConnection")));
+
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                    .AddEntityFrameworkStores<AppDbContext>();
 
             services.AddMvc(mvcoptions => mvcoptions.EnableEndpointRouting = false)
                     .AddXmlSerializerFormatters()
@@ -43,6 +47,8 @@ namespace DanEmployeeManagement
             }
 
             app.UseStaticFiles();
+
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {
