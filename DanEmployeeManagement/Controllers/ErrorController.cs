@@ -1,10 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DanEmployeeManagement.Controllers
 {
@@ -22,7 +18,6 @@ namespace DanEmployeeManagement.Controllers
 
             return View("NotFound");
         }
-
 
         [Route("Error")]
         [AllowAnonymous]
