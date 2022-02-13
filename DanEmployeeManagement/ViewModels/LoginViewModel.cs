@@ -2,7 +2,7 @@
 
 namespace DanEmployeeManagement.ViewModels
 {
-    public class RegisterEmployeeViewModel
+    public class LoginViewModel
     {
         [Required]
         [EmailAddress]
@@ -12,10 +12,7 @@ namespace DanEmployeeManagement.ViewModels
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password",
-        ErrorMessage = "Password and confirmation password do not match.")]
-        public string ConfirmPassword { get; set; }
+        [Display(Name = "Remember me")]
+        public bool RememberMe { get; set; }
     }
 }
