@@ -1,15 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Hosting;
 
-using DanEmployeeManagement.Models;
-using DanEmployeeManagement.ViewModels;
-using System.IO;
 using System;
+using System.IO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authorization;
+
+using DanEmployeeManagement.Models;
+using DanEmployeeManagement.ViewModels;
 
 namespace DanEmployeeManagement.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly IEmployeeRepository employeeRepository;
@@ -26,6 +29,7 @@ namespace DanEmployeeManagement.Controllers
             this.logger = logger;
         }
 
+        [AllowAnonymous]
         public ViewResult Index()
         {
             var employees = employeeRepository.GetAllEmployee();
@@ -33,6 +37,7 @@ namespace DanEmployeeManagement.Controllers
             return View(employees);
         }
 
+        [AllowAnonymous]
         public ViewResult Details(int? id)
         {
             //   throw new Exception("Error in Detaisls View");
@@ -78,12 +83,6 @@ namespace DanEmployeeManagement.Controllers
             return View(employeeEditViewModel);
         }
 
-        [HttpGet]
-        public ViewResult Create()
-        {
-            return View();
-        }
-
         [HttpPost]
         public IActionResult Edit(EmployeeEditViewModel model)
         {
@@ -117,28 +116,10 @@ namespace DanEmployeeManagement.Controllers
             return View();
         }
 
-        private string ProccesUploadedFile(EmployeeCreateViewModel model)
+        [HttpGet]
+        public ViewResult Create()
         {
-            string uniqueFileName = null;
-
-            if (model.Photos != null && model.Photos.Count > 0)
-            {
-                foreach (IFormFile photo in model.Photos)
-                {
-                    string uploadsFolder = Path.Combine(this.hostingEnvironment.WebRootPath, "images");
-
-                    uniqueFileName = Guid.NewGuid().ToString() + "_" + photo.FileName;
-
-                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-
-                    using (var fileStream = new FileStream(filePath, FileMode.Create))
-                    {
-                        photo.CopyTo(fileStream);
-                    }
-                }
-            }
-
-            return uniqueFileName;
+            return View();
         }
 
         [HttpPost]
@@ -162,6 +143,30 @@ namespace DanEmployeeManagement.Controllers
             }
 
             return View();
+        }
+
+        private string ProccesUploadedFile(EmployeeCreateViewModel model)
+        {
+            string uniqueFileName = null;
+
+            if (model.Photos != null && model.Photos.Count > 0)
+            {
+                foreach (IFormFile photo in model.Photos)
+                {
+                    string uploadsFolder = Path.Combine(this.hostingEnvironment.WebRootPath, "images");
+
+                    uniqueFileName = Guid.NewGuid().ToString() + "_" + photo.FileName;
+
+                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        photo.CopyTo(fileStream);
+                    }
+                }
+            }
+
+            return uniqueFileName;
         }
     }
 }

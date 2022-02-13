@@ -1,12 +1,14 @@
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 using DanEmployeeManagement.Models;
-using Microsoft.AspNetCore.Identity;
 
 namespace DanEmployeeManagement
 {
@@ -34,9 +36,18 @@ namespace DanEmployeeManagement
                 options.Password.RequireNonAlphanumeric = false;
             });
 
+            // The old one !
             services.AddMvc(mvcoptions => mvcoptions.EnableEndpointRouting = false)
-                    .AddXmlSerializerFormatters()
-                    .AddXmlDataContractSerializerFormatters();
+                               .AddXmlSerializerFormatters()
+                               .AddXmlDataContractSerializerFormatters();
+
+            // The new one ! Dont Work !
+            //services.AddMvc(config => {
+            //    var policy = new AuthorizationPolicyBuilder()
+            //                    .RequireAuthenticatedUser()
+            //                    .Build();
+            //    config.Filters.Add(new AuthorizeFilter(policy));
+            //});
 
             services.AddScoped<IEmployeeRepository, SqlEmployeeRepository>();
         }
