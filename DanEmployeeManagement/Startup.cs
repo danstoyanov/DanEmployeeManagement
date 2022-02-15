@@ -7,6 +7,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 using DanEmployeeManagement.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace DanEmployeeManagement
 {
@@ -35,17 +37,18 @@ namespace DanEmployeeManagement
             });
 
             // The old one !
-            services.AddMvc(mvcoptions => mvcoptions.EnableEndpointRouting = false)
-                               .AddXmlSerializerFormatters()
-                               .AddXmlDataContractSerializerFormatters();
+            //services.AddMvc(mvcoptions => mvcoptions.EnableEndpointRouting = false)
+            //                   .AddXmlSerializerFormatters()
+            //                   .AddXmlDataContractSerializerFormatters();
 
-            // The new one ! Dont Work !
-            //services.AddMvc(config => {
-            //    var policy = new AuthorizationPolicyBuilder()
-            //                    .RequireAuthenticatedUser()
-            //                    .Build();
-            //    config.Filters.Add(new AuthorizeFilter(policy));
-            //});
+            services.AddMvc(config =>
+            {
+                var policy = new AuthorizationPolicyBuilder()
+                                .RequireAuthenticatedUser()
+                                .Build();
+                    config.Filters.Add(new AuthorizeFilter(policy));
+            })
+                .AddMvcOptions(mvcoptions => mvcoptions.EnableEndpointRouting = false);    
 
             services.AddScoped<IEmployeeRepository, SqlEmployeeRepository>();
         }
