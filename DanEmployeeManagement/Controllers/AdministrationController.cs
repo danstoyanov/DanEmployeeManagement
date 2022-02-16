@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Threading.Tasks;
+
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 
 using DanEmployeeManagement.ViewModels;
-using System.Threading.Tasks;
 
 namespace DanEmployeeManagement.Controllers
 {
@@ -35,7 +36,7 @@ namespace DanEmployeeManagement.Controllers
 
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("index", "home");
+                    return RedirectToAction("ListRoles", "Administration");
                 }
 
                 foreach (IdentityError error in result.Errors)
@@ -45,6 +46,14 @@ namespace DanEmployeeManagement.Controllers
             }
 
             return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult ListRoles()
+        {
+            var roles = roleManager.Roles;
+
+            return View(roles);
         }
     }
 }
